@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172554">
+<title>LƯU TRỮ DỮ LIỆU</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--text:#172033;--muted:#697386;--line:#e5e9f2;--primary:#3157d5;--primary2:#2445b5;--soft:#eef2ff;--green:#16845b;--red:#c0394b;--shadow:0 10px 30px rgba(28,42,85,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:28px 22px 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:14px}.logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#3157d5,#7089f3);display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:0 7px 18px #3157d544}
+h1{font-size:23px;letter-spacing:.2px;margin:0}.subtitle{font-size:13px;color:var(--muted);margin-top:4px}.status{font-size:12px;background:#e9f7f0;color:var(--green);padding:7px 11px;border-radius:20px;font-weight:650}
+.hero{background:linear-gradient(120deg,#172554,#2948a6 65%,#6078df);border-radius:20px;padding:25px 28px;color:#fff;margin-bottom:20px;box-shadow:var(--shadow)}
+.hero h2{margin:0 0 7px;font-size:21px}.hero p{margin:0;color:#e0e7ff;font-size:14px;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.stat{padding:17px 19px}.stat-label{font-size:12px;color:var(--muted)}.stat-value{font-size:27px;font-weight:750;margin-top:5px}
+.layout{display:grid;grid-template-columns:350px minmax(0,1fr);gap:18px;align-items:start}.panel{padding:20px}.panel h3{font-size:16px;margin:0 0 16px}
+.field{margin-bottom:13px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:7px;color:#3d4658}
+input[type=text],textarea{width:100%;border:1px solid #dce2ee;border-radius:9px;padding:11px 12px;background:#fff;color:var(--text);outline:none}
+input:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px #3157d51a}textarea{resize:vertical;min-height:82px}
+.drop{border:1.5px dashed #b9c5e5;border-radius:12px;background:#f8f9ff;padding:20px 12px;text-align:center}
+.drop .symbol{font-size:27px}.drop p{font-size:12px;color:var(--muted);margin:7px 0 12px}.file-label{display:inline-block;background:#fff;border:1px solid #dce2ee;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:650;cursor:pointer}
+#fileInput{display:none}.selected{font-size:11px;color:var(--muted);margin-top:9px;overflow-wrap:anywhere}
+.btn{border:0;border-radius:9px;padding:11px 14px;font-weight:700;font-size:13px}.btn-primary{background:var(--primary);color:#fff;width:100%;margin-top:13px}.btn-primary:hover{background:var(--primary2)}.btn-light{background:#f0f3fa;color:#34405a}.btn-danger{background:#fff0f1;color:var(--red)}
+.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap}.toolbar h3{margin:0}.search{max-width:260px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px}
+table{border-collapse:collapse;width:100%;min-width:650px}th{background:#f7f8fc;text-align:left;padding:12px 13px;font-size:11px;letter-spacing:.35px;color:#59647a}td{padding:13px;border-top:1px solid var(--line);font-size:13px;vertical-align:top}
+.num{color:var(--muted);width:45px}.content-title{font-weight:700}.feedback{color:#566176;max-width:220px;white-space:pre-wrap}.file-item{display:flex;align-items:center;gap:7px;margin:0 0 8px;overflow-wrap:anywhere}.file-item a{color:var(--primary);text-decoration:none;font-size:12px}.file-item a:hover{text-decoration:underline}.row-actions{display:flex;gap:6px;flex-wrap:wrap}.mini{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 8px;font-size:11px;color:#47536b}.empty{text-align:center;color:var(--muted);padding:36px 12px}.empty strong{display:block;color:#39445a;margin-bottom:5px}
+.note{font-size:11px;color:var(--muted);line-height:1.6;margin-top:13px}.notice{background:#fff8e8;border:1px solid #f1dfb6;color:#75551b;padding:12px 14px;border-radius:11px;font-size:12px;line-height:1.6;margin-top:18px}
+.modal{position:fixed;inset:0;background:#11182799;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.open{display:flex}.modal-box{background:#fff;border-radius:15px;padding:20px;max-width:540px;width:100%;max-height:85vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.modal-head h3{margin:0}.preview{max-width:100%;max-height:65vh;display:block;margin:auto}
+footer{text-align:center;color:var(--muted);font-size:11px;margin-top:24px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:23px}}
+@media(max-width:520px){.wrap{padding:19px 13px 40px}header{align-items:flex-start}.status{display:none}.hero{padding:21px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.panel{padding:15px}.toolbar{align-items:stretch}.search{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo">▤</div><div><h1>LƯU TRỮ DỮ LIỆU</h1><div class="subtitle">Không gian quản lý và chia sẻ tài liệu</div></div></div>
+  <div class="status">● Đang hoạt động trên thiết bị này</div>
+</header>
+<section class="hero"><h2>Kho tài liệu của bạn</h2><p>Lưu trữ, sắp xếp và tra cứu tài liệu học tập, công việc tại một nơi. Hỗ trợ Word, PDF, Excel, hình ảnh và nhiều định dạng tệp khác.</p></section>
+<section class="stats">
+  <div class="stat"><div class="stat-label">TỔNG DỮ LIỆU</div><div class="stat-value" id="totalCount">0</div></div>
+  <div class="stat"><div class="stat-label">TỆP ĐÍNH KÈM</div><div class="stat-value" id="fileCount">0</div></div>
+  <div class="stat"><div class="stat-label">HÌNH ẢNH</div><div class="stat-value" id="imageCount">0</div></div>
+</section>
+<main class="layout">
+<section class="panel">
+  <h3>＋ Thêm dữ liệu mới</h3>
+  <form id="dataForm">
+    <div class="field"><label for="content">NỘI DUNG *</label><input id="content" type="text" maxlength="180" placeholder="Nhập tên hoặc nội dung dữ liệu..." required></div>
+    <div class="field"><label for="feedback">PHẢN HỒI</label><textarea id="feedback" placeholder="Nhập phản hồi hoặc ghi chú..."></textarea></div>
+    <div class="field"><label>TỆP ĐÍNH KÈM</label><div class="drop"><div class="symbol">📁</div><p>Kéo thả tệp vào đây hoặc chọn từ thiết bị</p><label class="file-label" for="fileInput">Chọn tệp</label><input id="fileInput" type="file" multiple><div class="selected" id="selectedFiles">Chưa chọn tệp nào</div></div></div>
+    <button class="btn btn-primary" type="submit">LƯU DỮ LIỆU</button>
+  </form>
+  <p class="note">Tệp được lưu trong bộ nhớ trình duyệt trên thiết bị hiện tại. Nên sao lưu dữ liệu định kỳ bằng chức năng xuất dữ liệu.</p>
+  <button class="btn btn-light" id="exportBtn" style="width:100%;margin-top:5px">↓ Xuất bản sao dữ liệu</button>
+  <button class="btn btn-light" id="importBtn" style="width:100%;margin-top:8px">↑ Nhập bản sao dữ liệu</button>
+  <input type="file" id="importFile" accept=".json,application/json" hidden>
+</section>
+<section class="panel">
+  <div class="toolbar"><h3>Danh sách dữ liệu</h3><input class="search" id="search" type="text" placeholder="⌕  Tìm kiếm..."></div>
+  <div class="table-wrap"><table><thead><tr><th>STT</th><th>NỘI DUNG</th><th>PHẢN HỒI</th><th>ĐƯỜNG DẪN</th></tr></thead><tbody id="tableBody"><tr><td colspan="4" class="empty"><strong>Chưa có dữ liệu</strong>Hãy thêm tài liệu đầu tiên của bạn.</td></tr></tbody></table></div>
+  <div class="notice"><b>Lưu ý khi đưa lên GitHub Pages:</b> Đây là website tĩnh. Mỗi người truy cập sẽ có dữ liệu riêng trên trình duyệt của họ. Muốn nhiều người cùng xem một kho dữ liệu và chia sẻ link tệp trực tuyến, bạn cần kết nối thêm dịch vụ lưu trữ/cơ sở dữ liệu như Supabase hoặc Firebase.</div>
+</section>
+</main>
+<footer>© <span id="year"></span> LƯU TRỮ DỮ LIỆU · Giao diện lưu trữ tài liệu cá nhân</footer>
+</div>
+<div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h3 id="modalTitle">Xem tệp</h3><button class="mini" id="closeModal">Đóng ✕</button></div><div id="modalContent"></div></div></div>
+<script>
+const DB_NAME='luu-tru-du-lieu-db', STORE='records';
+let db, selectedFiles=[];
+const $=id=>document.getElementById(id);
+const openDB=()=>new Promise((resolve,reject)=>{
+ const req=indexedDB.open(DB_NAME,1);
+ req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(STORE))req.result.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});};
+ req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
+});
+const tx=(mode,fn)=>new Promise((resolve,reject)=>{const t=db.transaction(STORE,mode),s=t.objectStore(STORE);let result;try{result=fn(s)}catch(e){reject(e);return}t.oncomplete=()=>resolve(result?.result);t.onerror=()=>reject(t.error)});
+const all=()=>new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(1)+' MB';
+const fileIcon=f=>f.type?.startsWith('image/')?'🖼️':/pdf/i.test(f.type)?'📕':/\.(doc|docx)$/i.test(f.name)?'📝':/\.(xls|xlsx|csv)$/i.test(f.name)?'📊':'📎';
+async function render(){
+ const records=await all(),q=$('search').value.toLowerCase();
+ $('totalCount').textContent=records.length;
+ $('fileCount').textContent=records.reduce((n,r)=>n+r.files.length,0);
+ $('imageCount').textContent=records.reduce((n,r)=>n+r.files.filter(f=>f.type.startsWith('image/')).length,0);
+ const shown=records.filter(r=>(r.content+' '+r.feedback+' '+r.files.map(f=>f.name).join(' ')).toLowerCase().includes(q));
+ $('tableBody').innerHTML=shown.length?shown.map((r,i)=>`<tr><td class="num">${i+1}</td><td><div class="content-title">${esc(r.content)}</div><div style="font-size:11px;color:#8992a3;margin-top:5px">${new Date(r.createdAt).toLocaleDateString('vi-VN')}</div></td><td><div class="feedback">${esc(r.feedback)||'—'}</div></td><td>${r.files.length?r.files.map((f,j)=>`<div class="file-item">${fileIcon(f)}<a href="#" data-open="${r.id}:${j}">${esc(f.name)}</a><span style="color:#9aa2b1;font-size:10px">${fmt(f.size)}</span></div>`).join(''):'<span style="color:#929bad">Chưa có tệp</span>'}<div class="row-actions"><button class="mini" data-share="${r.id}">Chia sẻ</button><button class="mini" data-edit="${r.id}">Sửa</button><button class="mini" data-delete="${r.id}">Xóa</button></div></td></tr>`).join(''):'<tr><td colspan="4" class="empty"><strong>'+(q?'Không tìm thấy kết quả':'Chưa có dữ liệu')+'</strong>'+(q?'Thử từ khóa khác.':'Hãy thêm tài liệu đầu tiên của bạn.')+'</td></tr>';
+}
+$('fileInput').addEventListener('change',e=>{selectedFiles=[...e.target.files];$('selectedFiles').textContent=selectedFiles.length?selectedFiles.map(f=>f.name).join(', '):'Chưa chọn tệp nào'});
+const drop=$('.drop');
+drop.addEventListener('dragover',e=>{e.preventDefault();drop.style.background='#edf1ff'});
+drop.addEventListener('dragleave',()=>drop.style.background='#f8f9ff');
+drop.addEventListener('drop',e=>{e.preventDefault();drop.style.background='#f8f9ff';selectedFiles=[...e.dataTransfer.files];$('selectedFiles').textContent=selectedFiles.map(f=>f.name).join(', ')||'Chưa chọn tệp nào'});
+$('dataForm').addEventListener('submit',async e=>{
+ e.preventDefault();const content=$('content').value.trim();if(!content)return;
+ const files=await Promise.all(selectedFiles.map(async f=>({name:f.name,type:f.type||'application/octet-stream',size:f.size,blob:f})));
+ await tx('readwrite',s=>s.add({content,feedback:$('feedback').value.trim(),files,createdAt:Date.now()}));
+ $('dataForm').reset();selectedFiles=[];$('selectedFiles').textContent='Chưa chọn tệp nào';await render();
+});
+$('search').addEventListener('input',render);
+$('tableBody').addEventListener('click',async e=>{
+ const a=e.target.closest('[data-open]');if(a){e.preventDefault();const [id,j]=a.dataset.open.split(':').map(Number),r=(await all()).find(x=>x.id===id),f=r?.files[j];if(!f)return;const url=URL.createObjectURL(f.blob);$('modalTitle').textContent=f.name;
+ if(f.type.startsWith('image/'))$('modalContent').innerHTML=`<img class="preview" src="${url}" alt="${esc(f.name)}">`;
+ else if(f.type==='application/pdf')$('modalContent').innerHTML=`<iframe src="${url}" style="width:100%;height:65vh;border:0"></iframe>`;
+ else $('modalContent').innerHTML=`<p>Tệp: <b>${esc(f.name)}</b></p><p>Kích thước: ${fmt(f.size)}</p><a class="btn btn-primary" style="display:inline-block;text-decoration:none" href="${url}" download="${esc(f.name)}">Tải xuống tệp</a>`;
+ $('modal').classList.add('open');return;}
+ const del=e.target.closest('[data-delete]');if(del){if(confirm('Bạn có chắc muốn xóa dữ liệu này?')){await tx('readwrite',s=>s.delete(Number(del.dataset.delete)));render();}return;}
+ const edit=e.target.closest('[data-edit]');if(edit){const id=Number(edit.dataset.edit),r=(await all()).find(x=>x.id===id);const content=prompt('Chỉnh sửa nội dung:',r.content);if(content===null)return;const feedback=prompt('Chỉnh sửa phản hồi:',r.feedback);if(feedback===null)return;r.content=content.trim()||r.content;r.feedback=feedback;await tx('readwrite',s=>s.put(r));render();return;}
+ const share=e.target.closest('[data-share]');if(share){alert('Chia sẻ trực tuyến cần kết nối website với máy chủ/cơ sở dữ liệu. Bản GitHub Pages hiện tại lưu tệp riêng trên từng trình duyệt, nên link website không tự chia sẻ được tệp.');}
+});
+$('closeModal').onclick=()=>{$('modal').classList.remove('open');$('modalContent').innerHTML=''};
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))$('closeModal').click()});
+$('exportBtn').onclick=async()=>{const records=await all();const payload=[];for(const r of records){const files=[];for(const f of r.files){files.push({name:f.name,type:f.type,size:f.size,data:await blobToBase64(f.blob)});}payload.push({...r,files});}download(new Blob([JSON.stringify(payload)],{type:'application/json'}),'sao-luu-du-lieu.json');};
+function blobToBase64(blob){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob);});}
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!Array.isArray(data))throw Error();for(const r of data){const files=[];for(const f of r.files||[]){const res=await fetch(f.data);files.push({name:f.name,type:f.type,size:f.size,blob:await res.blob()});}await tx('readwrite',s=>s.add({content:r.content,feedback:r.feedback,files,createdAt:r.createdAt||Date.now()}));}await render();alert('Đã nhập bản sao dữ liệu.');}catch(err){alert('Không thể đọc tệp sao lưu.');}e.target.value='';};
+$('year').textContent=new Date().getFullYear();
+(async()=>{try{db=await openDB();await render();}catch(e){alert('Trình duyệt không hỗ trợ lưu trữ dữ liệu cần thiết. Hãy thử Chrome, Edge hoặc Firefox.');}})();
+</script>
+</body>
+</html>
